@@ -38,7 +38,7 @@ const onInputUrlEvent = async (inputValue) => {
     console.log("영상 이름:", info.videoDetails.title);
     printFormat(info.formats);
     downloadInfo.url = inputValue;
-    downloadInfo.filename = info.videoDetails.title + ".mp4";
+    downloadInfo.filename = getFileName(info.videoDetails.title) + ".mp4";
     process.stdout.write("저장할 화질 번호를 입력해주세요:");
     mode = FORMAT_INPUT_MODE;
     rl.resume();
@@ -117,6 +117,15 @@ const printFormat = (formats) => {
 
 const getFileSize = (size) => {
   return `${(size / (1024 * 1024)).toFixed(2)}MB`;
+};
+
+const getFileName = (name) => {
+  {
+    if (name.length > 10) {
+      name = name.substring(0, 9);
+    }
+    return name;
+  }
 };
 
 process.stdout.write("주소를 입력해주세요:");
